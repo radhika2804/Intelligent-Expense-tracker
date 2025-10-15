@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e0e7ff 0%, #ffe0ec 100%);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.login-container {
+    max-width: 400px;
+    margin: 40px auto 0 auto; /* Reduce top margin to bring box closer */
+    background: white;
+    padding: 30px 20px;
+    box-shadow: 0 0 16px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid #e3e3e3;
+}
+h2 {
+    margin-bottom: 20px;
+}
+form input {
+    width: 90%;
+    padding: 12px 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+form button {
+    width: 95%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+form button:hover {
+    background-color: #0056b3;
+}
+.main-heading {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #22223b;
+    margin-top: 20px;      /* Shift headline down */
+    margin-bottom: 0;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 12px #bdbdbd;
+}
+.sub-heading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #2d3142;           /* Changed to a darker color */
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 8px #bdbdbd;
+}
+.background-messages {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.msg {
+    position: absolute;
+    opacity: 0.55; /* Even darker appearance */
+    font-weight: bold;
+    white-space: nowrap;
+    user-select: none;
+    transition: opacity 0.3s;
+}
+
+/* Very dark, saturated colors for each message */
+/* Adjusted positions to avoid the center login box */
+.msg1  { top: 8%;  left: 5%;   color: #6d0035; font-size: 2.2rem; font-family: 'Comic Sans MS', cursive, sans-serif; transform: rotate(-8deg);}
+.msg2  { top: 12%; right: 6%;  color: #003c4d; font-size: 1.5rem; font-family: 'Courier New', Courier, monospace; transform: rotate(7deg);}
+.msg3  { top: 80%; left: 7%;   color: #7a5c00; font-size: 2rem; font-family: 'Segoe Script', 'Segoe UI', cursive; transform: rotate(-12deg);}
+.msg4  { top: 85%; right: 8%;  color: #a34a00; font-size: 1.3rem; font-family: 'Arial Black', Arial, sans-serif; transform: rotate(10deg);}
+.msg5  { top: 25%; right: 4%;  color: #174d1a; font-size: 2.1rem; font-family: 'Impact', Charcoal, sans-serif; transform: rotate(-6deg);}
+.msg6  { top: 70%; left: 3%;   color: #2e0854; font-size: 1.6rem; font-family: 'Lucida Console', Monaco, monospace; transform: rotate(12deg);}
+.msg7  { top: 18%; left: 4%;   color: #7a1f00; font-size: 1.8rem; font-family: 'Trebuchet MS', Helvetica, sans-serif; transform: rotate(-10deg);}
+.msg8  { top: 60%; right: 5%;  color: #003366; font-size: 2.3rem; font-family: 'Brush Script MT', cursive; transform: rotate(8deg);}
+.msg9  { top: 40%; left: 2%;   color: #111; font-size: 1.4rem; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; transform: rotate(-7deg);}
+.msg10 { top: 75%; right: 3%;  color: #4b0000; font-size: 1.7rem; font-family: 'Georgia', serif; transform: rotate(11deg);}
+
+/* Ensure login box and headings are above background messages */
+.main-heading, .sub-heading, .login-container {
+    position: relative;
+    z-index: 1;
+}
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+    gap: 10px;
+}
+.tab-buttons button {
+    padding: 8px 24px;
+    border: none;
+    background: #e0e7ff;
+    color: #22223b;
+    font-size: 1rem;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+.tab-buttons button.active {
+    background: #22223b;
+    color: #fff;
+}
