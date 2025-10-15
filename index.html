@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login / Register - Expense Tracker</title>
+    <link rel="stylesheet" type="text/css" href="login-style.css" />
+</head>
+<body>
+    <div class="background-messages">
+        <span class="msg msg1">Track Smart, Spend Wise</span>
+        <span class="msg msg2">Your Budget’s Best Friend</span>
+        <span class="msg msg3">Expense Tracking Made Intelligent</span>
+        <span class="msg msg4">Stay on Budget, Stay in Control</span>
+        <span class="msg msg5">Simplify Spending, Maximize Saving</span>
+        <span class="msg msg6">Intelligent Finance at Your Fingertips</span>
+        <span class="msg msg7">Monitor, Manage, Master Your Money</span>
+        <span class="msg msg8">Smarter Spending, Better Living</span>
+        <span class="msg msg9">Budget Smarter, Live Better</span>
+        <span class="msg msg10">Your Personal Expense Guardian</span>
+    </div>
+    <h1 class="main-heading">IntelliExpense</h1>
+    <div class="sub-heading">Your Daily Expense Tracker with AI Budget Monitoring</div>
+    <div class="login-container">
+        <div class="tab-buttons">
+            <button id="signInTab" class="active" onclick="showForm('signIn')">Sign In</button>
+            <button id="signUpTab" onclick="showForm('signUp')">Sign Up</button>
+        </div>
+        <form id="signInForm">
+            <h2>Sign In</h2>
+            <input type="text" id="signin-user-id" placeholder="User ID or Email" required />
+            <input type="password" id="signin-password" placeholder="Password" required />
+            <button type="submit">Sign In</button>
+        </form>
+        <form id="signUpForm" style="display:none;">
+            <h2>Sign Up</h2>
+            <input type="text" id="signup-user-id" placeholder="Unique User ID" required />
+            <input type="text" id="signup-user-name" placeholder="User Name" required />
+            <input type="email" id="signup-email" placeholder="Email ID" required />
+            <input type="password" id="signup-password" placeholder="Password" required />
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+    <script>
+        function showForm(form) {
+            document.getElementById('signInForm').style.display = form === 'signIn' ? 'block' : 'none';
+            document.getElementById('signUpForm').style.display = form === 'signUp' ? 'block' : 'none';
+            document.getElementById('signInTab').classList.toggle('active', form === 'signIn');
+            document.getElementById('signUpTab').classList.toggle('active', form === 'signUp');
+        }
+
+        // Helper to get users from localStorage
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('users') || '[]');
+        }
+
+        // Helper to save users to localStorage
+        function saveUsers(users) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Show error messages
+        function showError(formId, message) {
+            let errorDiv = document.getElementById(formId + '-error');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.id = formId + '-error';
+                errorDiv.style.color = 'red';
+                errorDiv.style.marginBottom = '10px';
+                document.getElementById(formId).prepend(errorDiv);
+            }
+            errorDiv.textContent = message;
+        }
+
+        // Clear error messages
+        function clearError(formId) {
+            let errorDiv = document.getElementById(formId + '-error');
+            if (errorDiv) errorDiv.textContent = '';
+        }
+
+        // Sign Up logic
+        document.getElementById('signUpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearError('signUpForm');
+            const userId = document.getElementById('signup-user-id').value.trim();
+            const userName = document.getElementById('signup-user-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim().toLowerCase();
+            const password = document.getElementById('signup-password').value;
+
+            const users = getUsers();
+            const exists = users.some(u => u.userId === userId || u.email === email);
+
+            if (exists) {
+                showError('signUpForm', 'User ID or Email already exists. Please sign in.');
+                return;
+            }
+
+            users.push({ userId, userName, email, password });
+            saveUsers(users);
+            window.location.href = 'dash.html';
+        });
+
+        // Sign In logic
+        document.getElementById('signInForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearError('signInForm');
+            const userIdOrEmail = document.getElementById('signin-user-id').value.trim().toLowerCase();
+            const password = document.getElementById('signin-password').value;
+
+            const users = getUsers();
+            const user = users.find(u => (u.userId === userIdOrEmail || u.email === userIdOrEmail) && u.password === password);
+
+            if (!user) {
+                showError('signInForm', 'Invalid credentials or user does not exist.');
+                return;
+            }
+
+            window.location.href = 'dash.html';
+        });
+    </script>
+</body>
+</html>
